@@ -121,20 +121,16 @@ def exercise_three():
         def __init__(self, file_name):
             self.file_name = file_name
 
-        def students_from_file(self):
-            """
-            Метод для создания базы данных студентов
-            """
             dict_objects_stud = DataBase.STUDENTS
 
-            with open(self.file_name) as student_file:
+            with open(file_name) as student_file:
                 for names in student_file:
                     name = names[:names.index(":")]
-                    dict_objects_stud[name] = type(Student(name, self.file_name))
+                    dict_objects_stud[name] = type(Student(name, file_name))
 
-        def new_marks(self):
+        def new_student(self):
             """
-            Метод для создания нового студента в файле
+            Метод для создания нового студента в базе данных
             """
             with open(self.file_name, "a") as students_file:
                 name = "\n" + input("Введите имя нового студента:") + ":"
@@ -144,21 +140,13 @@ def exercise_three():
                     students_file.write(mark)
                     mark = " " + str(input("Введите оценку: "))
 
-        def new_student(self):
-            """
-            Метод для создания нового студента в базе данных
-            """
-            new_student = DataBase(self.file_name)
-            new_student.new_marks()
-            new_student.students_from_file()
+            DataBase.__init__(self, self.file_name)
 
         def delete_student(self, del_stud_name):
             """
             Метод для удаления требуемого студента из базы
             """
             dict_objects_stud = DataBase.STUDENTS
-            delete_student = DataBase(self.file_name)
-            delete_student.students_from_file()
 
             del dict_objects_stud[del_stud_name]
 
@@ -169,13 +157,13 @@ def exercise_three():
                     if names[:names.index(":")] != del_stud_name:
                         students_delete.write(names)
 
+            DataBase.__init__(self, self.file_name)
+
         def best_student(self):
             """
             Метод для вывода лучшего студента на основе среднего балла
             """
             dict_objects_stud = DataBase.STUDENTS
-            all_student = DataBase(self.file_name)
-            all_student.students_from_file()
 
             best_student_name = ""
             best_student_mark = 0
@@ -189,12 +177,11 @@ def exercise_three():
 
             print(f"Студент с именем {best_student_name} имеет наивысший балл равный {best_student_mark}")
 
-    # data_base = DataBase("pupils.txt")
-    
-    # data_base.students_from_file()
+    data_base = DataBase("pupils.txt")
+
     # data_base.new_student()
-    # data_base.delete_student("Артем")
-    # data_base.best_student()
+    data_base.delete_student("Qwert")
+    data_base.best_student()
 
 
 exercise_three()
