@@ -20,6 +20,7 @@ def exercise_one():
         elif day.find("практика") > 0:
             practice += 1
 
+    read_file.close()
     print("Лабораторные: ", labs)
     print("Лекции: ", lectures)
     print("Практические занятия: ", practice)
@@ -31,8 +32,9 @@ def exercise_two():
     Пользователь может снова вводить числа. Их сумма будет добавляться к уже посчитанной, и итог выводиться на экран.
     Когда вместо чисел вводится специальный символ, программа завершается.
     """
-    numbers_string = input("Введите числа: ")
+    numbers_string = input("Введите числа: ").split(" ")
     numbers = 0
+
     for i in numbers_string:
         if i.isdigit():
             numbers = numbers + int(i)
@@ -50,12 +52,13 @@ def exercise_three():
     В заданной строке найти самое короткое слово.
     """
     numbers_of_letters = 0
-    string_with_min_letters = None
 
-    required_string = "ones two three four five six"
+    required_string = "name is Artem"
     required_string = [i for i in required_string.split(" ")]
 
     max_number = len(required_string[0])
+    string_with_min_letters = required_string[0]
+
     for string in required_string:
         for _ in string:
             numbers_of_letters += 1
@@ -144,7 +147,7 @@ def exercise_seven():
 
 # exercise_one()
 # exercise_two()
-# exercise_three()
+exercise_three()
 # exercise_four()
 # exercise_five()
 # exercise_six()
