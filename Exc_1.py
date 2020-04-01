@@ -33,15 +33,21 @@ def exercise_two():
     Когда вместо чисел вводится специальный символ, программа завершается.
     """
     numbers_string = input("Введите числа: ").split(" ")
-    numbers = 0
 
-    for i in numbers_string:
-        if i.isdigit():
-            numbers = numbers + int(i)
+    def sum_of_numbers(numbers_in_string):
+        sum_of_req_numbers = 0
+        print(numbers_in_string)
+        for i in numbers_in_string:
+            if i.isdigit():
+                sum_of_req_numbers = sum_of_req_numbers + int(i)
+        return sum_of_req_numbers
+
+    numbers = sum_of_numbers(numbers_string)
+
     print("Сумма чисел: ", numbers)
     another_number = input("Введите число: ")
     while another_number.lower() != "все":
-        numbers = numbers + int(another_number)
+        numbers = numbers + sum_of_numbers(another_number)
         print("Сумма чисел: ", numbers)
         another_number = input("Введите число: ")
     print("Конечная сумма: ", numbers)
@@ -51,23 +57,16 @@ def exercise_three():
     """
     В заданной строке найти самое короткое слово.
     """
-    numbers_of_letters = 0
+    input_string = "name is Artem"
+    required_string = input_string.split(' ')
 
-    required_string = "name is Artem"
-    required_string = [i for i in required_string.split(" ")]
-
-    max_number = len(required_string[0])
     string_with_min_letters = required_string[0]
 
-    for string in required_string:
-        for _ in string:
-            numbers_of_letters += 1
-        max_letters = numbers_of_letters
-        numbers_of_letters = 0
-        if max_letters < max_number:
-            max_number = max_letters
-            string_with_min_letters = string
+    for index in range(1, len(required_string) - 1):
+        if len(required_string[index]) < len(string_with_min_letters):
+            string_with_min_letters = required_string[index]
 
+    max_number = len(string_with_min_letters)
     print(f"Строка с минимальным числом букв это - {string_with_min_letters} и она имеет {max_number} буквы/букв")
 
 
@@ -81,7 +80,7 @@ def exercise_four():
 
     print("Первоначальный массив:\n", mas_a)
     i = 0
-    while i <= len(mas_a) - 1:
+    while i < len(mas_a):
         if 35 < mas_a[i] < 65:
             del mas_a[i]
         i += 1
@@ -97,6 +96,10 @@ def exercise_five():
     numbers_even_count = 0
     numbers_odd_count = 0
     number = input("Введите число для проверки: ")
+
+    while number.isalpha():
+        print("Введено некорректное значение.")
+        number = input("Введите число для проверки: ")
     for i in number:
         if int(i) % 2 == 0:
             numbers_even_count += 1
@@ -110,10 +113,10 @@ def exercise_six():
     """
     Определить, принадлежит ли точка с координатами (x; y) кругу радиуса R с центром в начале координат.
     """
-    start_x = 1
-    start_y = -1
-    radius = 3
+    start_x = 0
+    start_y = 0
 
+    radius = int(input("Введите радиус круга: "))
     x_coord = int(input("Введите координату х: "))
     y_coord = int(input("Введите координату y: "))
 
@@ -147,7 +150,7 @@ def exercise_seven():
 
 # exercise_one()
 # exercise_two()
-exercise_three()
+# exercise_three()
 # exercise_four()
 # exercise_five()
 # exercise_six()
